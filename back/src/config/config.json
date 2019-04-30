@@ -1,0 +1,18 @@
+{
+  "development": {
+    "username": "runauser",
+    "password": "runauser",
+    "database": "runahr",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "runauser",
+    "password": "runauser",
+    "database": "runahr-t",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
+
+

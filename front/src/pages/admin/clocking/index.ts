@@ -1,0 +1,6 @@
+import Page from './page';
+import { connect } from 'react-redux';
+
+
+
+export default connect()(Page);

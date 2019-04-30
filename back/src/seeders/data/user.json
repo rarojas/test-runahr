@@ -1,0 +1,90 @@
+[
+  {
+    "username": "ricardo",
+    "email": "ricardo@runahr.com",
+    "password": "ricardo",
+    "createdAt": "2018-11-13 07:22:42",
+    "updatedAt": "2019-03-10 20:15:22",
+    "role": "admin"
+  },
+  {
+    "username": "ruc0",
+    "email": "gloveman0@twitter.com",
+    "password": "userpass",
+    "createdAt": "2018-11-13 07:22:42",
+    "updatedAt": "2019-03-10 20:15:22",
+    "role": "employe"
+  },
+  {
+    "username": "tpedycan1",
+    "email": "tmorrid1@cnbc.com",
+    "password": "userpass",
+    "createdAt": "2018-08-17 15:45:24",
+    "updatedAt": "2018-11-13 03:37:15",
+    "role": "employe"
+  },
+  {
+    "username": "catwel2",
+    "email": "jfitzjohn2@simplemachines.org",
+    "password": "userpass",
+    "createdAt": "2018-06-26 21:35:05",
+    "updatedAt": "2018-05-31 12:13:20",
+    "role": "employe"
+  },
+  {
+    "username": "psimner3",
+    "email": "tbarnsdale3@bloglines.com",
+    "password": "userpass",
+    "createdAt": "2018-11-21 10:35:23",
+    "updatedAt": "2018-07-20 14:41:38",
+    "role": "employe"
+  },
+  {
+    "username": "ehuckerbe4",
+    "email": "ajaycock4@tripod.com",
+    "password": "userpass",
+    "createdAt": "2018-12-16 08:16:53",
+    "updatedAt": "2019-02-20 18:42:41",
+    "role": "employe"
+  },
+  {
+    "username": "wrylett5",
+    "email": "eheinsius5@edublogs.org",
+    "password": "userpass",
+    "createdAt": "2018-05-14 09:17:16",
+    "updatedAt": "2018-08-12 09:10:22",
+    "role": "employe"
+  },
+  {
+    "username": "rkenderdine6",
+    "email": "gmatches6@google.de",
+    "password": "userpass",
+    "createdAt": "2018-08-11 13:33:22",
+    "updatedAt": "2018-08-16 13:50:07",
+    "role": "employe"
+  },
+  {
+    "username": "apuleston7",
+    "email": "xnewe7@smh.com.au",
+    "password": "userpass",
+    "createdAt": "2018-11-07 18:32:44",
+    "updatedAt": "2018-07-19 02:30:27",
+    "role": "employe"
+  },
+  {
+    "username": "elamperti8",
+    "email": "mmauser8@weebly.com",
+    "password": "userpass",
+    "createdAt": "2018-07-10 05:19:28",
+    "updatedAt": "2018-08-12 23:56:07",
+    "role": "employe"
+  },
+  {
+    "username": "sjoost9",
+    "email": "sbosquet9@bravesites.com",
+    "password": "userpass",
+    "createdAt": "2019-01-07 21:48:38",
+    "updatedAt": "2018-10-07 05:33:44",
+    "role": "employe"
+  }
+]

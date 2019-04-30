@@ -1,0 +1,6 @@
+--exit
+--recursive
+--require babel-register
+--require test/setup.ts
+--slow 2
+--timeout 10000
