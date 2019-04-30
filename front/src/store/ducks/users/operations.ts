@@ -1,6 +1,5 @@
-import { getUsers, addUser, editUser, checkUser } from './types';
+import { getUsers, addUser, editUser } from './types';
 import { Epic } from 'redux-observable';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { of, Observable, throwError } from 'rxjs';
 import { axios } from '../../client/axios';
@@ -54,35 +53,4 @@ const editUserEpic: Epic = action$ =>
     )
   );
 
-const checkUserEpic: Epic = action$ =>
-  action$.ofType(checkUser.type).pipe(
-    mergeMap(authenticated),
-    mergeMap(({ payload }: any) =>
-      axios.post('/api/check/', payload).pipe(
-        map(({ data }) => checkUser.success(data)),
-        catchError(err => of(checkUser.failure(err)))
-      )
-    )
-  );
-
-const getReportEpic: Epic = action$ =>
-  action$.ofType(checkUser.type).pipe(
-    mergeMap(authenticated),
-    mergeMap(({ payload: params }: any) => {
-      const config = {
-        params
-      };
-      return axios.get('/api/user/report', config).pipe(
-        map(({ data }) => checkUser.success(data)),
-        catchError(err => of(checkUser.failure(err)))
-      );
-    })
-  );
-
-export default [
-  getUsersEpic,
-  addUserEpic,
-  editUserEpic,
-  checkUserEpic,
-  getReportEpic
-];
+export default [getUsersEpic, addUserEpic, editUserEpic];

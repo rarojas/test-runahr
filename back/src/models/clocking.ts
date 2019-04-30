@@ -1,10 +1,12 @@
 import { SequelizeAttributes } from './../typings/SequelizeAttributes/index.d';
 import * as Sequelize from 'sequelize';
+import models from '.';
 
 export interface ClockingAttributes {
   id?: number;
   time: Date;
   type: string;
+  userId: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -12,7 +14,6 @@ export interface ClockingAttributes {
 export interface ClockingInstance
   extends Sequelize.Instance<ClockingAttributes>,
     ClockingAttributes {}
-
 
 const ClockingFactory = (
   sequelize: Sequelize.Sequelize,
@@ -25,6 +26,9 @@ const ClockingFactory = (
     type: {
       type: DataTypes.ENUM,
       values: ['IN', 'OUT']
+    },
+    userId: {
+      type: Sequelize.INTEGER
     }
   };
 
@@ -33,7 +37,8 @@ const ClockingFactory = (
     attributes,
     {}
   );
-  Clocking.associate = models => Clocking.belongsTo(models.clocking);
+  Clocking.associate = (models: Sequelize.Models) =>
+    Clocking.belongsTo(models.user);
 
   return Clocking;
 };

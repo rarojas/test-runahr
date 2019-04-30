@@ -3,7 +3,7 @@ const rules = {
     static: ['report:list']
   },
   admin: {
-    static: ['user:list', 'clocking:create']
+    static: ['report:list', 'user:list', 'clocking:create']
   }
 };
 

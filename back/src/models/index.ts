@@ -5,11 +5,8 @@ import ClockingFactory from './clocking';
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
 
 export const createModels = (): DbInterface => {
-  //const { database, username, password, params } = sequelizeConfig;
-
   let sequelize;
   if (config.use_env_variable) {
     sequelize = new Sequelize.Sequelize(

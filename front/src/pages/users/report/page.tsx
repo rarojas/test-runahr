@@ -8,6 +8,13 @@ import {
   RowCentered
 } from '../../../components/layout/Forms/Layouts';
 import ReactTable, { Column as TableColumn } from 'react-table';
+import Clocking from '../../admin/clocking/page';
+import { List } from 'immutable';
+
+interface Props {
+  getReport: Function;
+  clockings: List<Clocking>;
+}
 
 const columns: Array<TableColumn> = [
   {
@@ -27,13 +34,19 @@ const columns: Array<TableColumn> = [
   }
 ];
 
-export default class ReportPage extends React.Component {
+export default class ReportPage extends React.Component<Props> {
+  componentDidMount() {
+    this.props.getReport();
+  }
+
   render() {
+    const { clockings } = this.props;
     return (
       <ContainerFull fluid>
         <RowCentered>
           <Column>
             <ReactTable
+              data={clockings.toArray()}
               columns={columns}
               pageSize={10}
               pageSizeOptions={[10]}

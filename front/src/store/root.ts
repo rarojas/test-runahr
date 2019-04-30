@@ -1,3 +1,4 @@
+import { ClockingReducer } from './ducks/clockings/types';
 import { UserReducer } from './ducks/users/types';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
@@ -9,6 +10,7 @@ import { AuthRecord } from './ducks/authentication/types';
 export interface State {
   authentication: AuthRecord;
   users: UserReducer;
+  clockings: ClockingReducer;
   form: any;
 }
 

@@ -17,10 +17,6 @@ const UsersReducer = Immutable.Record({
   loading: false
 })();
 
-const ClokcingsReducer = Immutable.Record({
-  clokings: Map<string, types.User>(),
-  loading: false
-})();
 
 export function toMap<T>(obj: [], key: string, record: any) {
   return obj.reduce((acc, item) => {

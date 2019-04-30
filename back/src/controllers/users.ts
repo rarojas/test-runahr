@@ -47,7 +47,7 @@ class UsersController {
     const users = await models.user.findAll({
       where: {
         username: {
-          [Op.contains]: query.search
+          [Op.like]: `%${query.search}%`
         }
       },
       limit: 10

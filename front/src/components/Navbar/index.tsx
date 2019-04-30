@@ -61,6 +61,9 @@ export default class NavbarLight extends React.Component<Props> {
                     <Link to="/clockings">
                       <NavbarLink light>Check In</NavbarLink>
                     </Link>
+                    <Link to="/report">
+                      <NavbarLink light>My Report</NavbarLink>
+                    </Link>
                   </>
                 ) : (
                   <Link to="/report">

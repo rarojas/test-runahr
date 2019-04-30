@@ -20,7 +20,9 @@ interface State {
   selected?: User;
 }
 
-interface Props {}
+interface Props {
+  checkUser: Function;
+}
 
 export default class Clocking extends React.Component<Props, State> {
   state: State = {
@@ -39,6 +41,14 @@ export default class Clocking extends React.Component<Props, State> {
     this.setState({
       selected
     });
+  };
+
+  checkUser = () => {
+    const { selected } = this.state;
+    if (selected)
+      this.props.checkUser({
+        userId: selected!.id
+      });
   };
 
   render() {
@@ -68,7 +78,9 @@ export default class Clocking extends React.Component<Props, State> {
                 <div>{selected!.username}</div>
                 <div>{selected!.role}</div>
                 <CurrentTime />
-                <Button primary>Check In</Button>
+                <Button primary onClick={this.checkUser}>
+                  Check In
+                </Button>
               </>
             )}
           </Column>
