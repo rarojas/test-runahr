@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from './../typings/SequelizeAttributes/index';
+import { SequelizeAttributes } from '../typings/SequelizeAttributes/index';
 
 export interface UserAttributes {
   id?: number;
@@ -16,15 +16,27 @@ export interface UserInstance
   extends Sequelize.Instance<UserAttributes>,
     UserAttributes {
   validPassword: (password: string) => Promise<boolean>;
+  toJson: () => any;
 }
 
 export interface UserModel
   extends Sequelize.Model<UserInstance, UserAttributes> {
   prototype?: {
     validPassword: (password: string) => Promise<boolean>;
+    toJson: () => any;
   };
   findByLogin?(login: string): Promise<UserInstance | undefined>;
 }
+
+const hashPassword = (user: UserInstance) => {
+  if (user.password)
+    return bcrypt
+      .hash(user.password, 10)
+      .then((hash: string) => (user.password = hash))
+      .catch(err => {
+        throw new Error(err);
+      });
+};
 
 const UserFactory = (
   sequelize: Sequelize.Sequelize,
@@ -68,17 +80,16 @@ const UserFactory = (
     return await bcrypt.compare(password, this.dataValues.password);
   };
 
+  User.prototype.toJson = function() {
+    const userObj = Object.assign({}, this.dataValues);
+    delete userObj.password;
+    return userObj;
+  };
+
   User.associate = models => User.hasMany(models.clocking);
-  User.beforeCreate((user: UserInstance, options) =>
-    bcrypt
-      .hash(user.password, 10)
-      .then((hash: string) => {
-        user.password = hash;
-      })
-      .catch(err => {
-        throw new Error(err);
-      })
-  );
+  User.beforeCreate(hashPassword);
+
+  User.beforeUpdate(hashPassword);
 
   User.findByLogin = async (
     login: string

@@ -1,6 +1,7 @@
 import * as express from 'express';
 import models from '../models';
 import { checkRole } from '../auth/acl';
+import { onlyAdmin } from '../auth/rules';
 
 class ClockingController {
   router: express.Router;
@@ -12,7 +13,7 @@ class ClockingController {
   }
 
   initialize() {
-    this.router.post(this.path + '/check', checkRole('admin'), this.checkUser);
+    this.router.post(this.path + '/check', onlyAdmin, this.checkUser);
     this.router.get(this.path + '/me', this.getReport);
   }
 

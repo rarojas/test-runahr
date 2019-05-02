@@ -3,6 +3,7 @@ import models from '../models';
 import * as url from 'url';
 import { Op } from 'sequelize';
 import { checkRole } from '../auth/acl';
+import { onlyAdmin } from '../auth/rules';
 
 class UsersController {
   path = '/user';
@@ -15,10 +16,10 @@ class UsersController {
   }
 
   initialize() {
-    this.router.get(this.path, checkRole('admin'), this.getUsers);
-    this.router.post(this.path, checkRole('admin'), this.createUser);
-    this.router.put(this.path, checkRole('admin'), this.updateUser);
-    this.router.get(this.path + '/search', checkRole('admin'), this.searchUser);
+    this.router.get(this.path, onlyAdmin, this.getUsers);
+    this.router.post(this.path, onlyAdmin, this.createUser);
+    this.router.put(this.path, onlyAdmin, this.updateUser);
+    this.router.get(this.path + '/search', onlyAdmin, this.searchUser);
   }
 
   async getUsers(req: express.Request, res: express.Response) {
@@ -27,17 +28,16 @@ class UsersController {
   }
 
   async createUser(req: express.Request, res: express.Response) {
-    const user = req.body;
-    await models.user.create(user);
-    res.sendStatus(201);
+    let user = req.body;
+    user = await models.user.create(user);
+    res.status(201).json(user.toJson());
   }
 
   async updateUser(req: express.Request, res: express.Response) {
-    const user = req.body;
-    await models.user.update(user, {
-      where: { id: user.id }
-    });
-    res.sendStatus(201);
+    const userData = req.body;
+    let user = await models.user.findByPk(userData.id);
+    user = await user.update(userData);
+    res.json(user);
   }
 
   async searchUser(req: express.Request, res: express.Response) {

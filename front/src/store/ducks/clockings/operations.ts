@@ -1,38 +1,52 @@
+import { Action } from './../../utils/factory.types';
+import { State } from './../../root';
 import { authenticated } from './../users/operations';
-import { getReport, checkUser } from './types';
+import { getReport, checkUser, displaySuccess } from './types';
 import { Epic } from 'redux-observable';
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
+import { of, from, empty } from 'rxjs';
 import { axios } from '../../client/axios';
+import Swal from 'sweetalert2';
 
 const checkUserEpic: Epic = action$ =>
   action$.ofType(checkUser.type).pipe(
     mergeMap(authenticated),
     mergeMap(({ payload }: any) =>
       axios.post('/api/clocking/check', payload).pipe(
-        map(({ data }) => checkUser.success(data)),
+        mergeMap(({ data }) => [checkUser.success(data), displaySuccess()]),
         catchError(err => of(checkUser.failure(err)))
       )
     )
   );
 
-const getReportEpic: Epic = action$ =>
+const getReportEpic: Epic<any, any, State, any> = (action$, state$) =>
   action$.ofType(getReport.type).pipe(
     mergeMap(authenticated),
-    mergeMap(({ payload: params }: any) => {
-      const config = {
-        params
-      };
-      return axios.get('/api/clocking/me', config).pipe(
+    mergeMap(() =>
+      axios.get('/api/clocking/me').pipe(
         map(({ data }) =>
           getReport.success({
-            userId: params.userId,
+            id: state$.value.authentication.getIn(['user', 'id']),
             clockings: data
           })
         ),
         catchError(err => of(getReport.failure(err)))
-      );
-    })
+      )
+    )
   );
 
-export default [getReportEpic, checkUserEpic];
+const displayNotificationEpic: Epic = action$ =>
+  action$.ofType(displaySuccess.type).pipe(
+    switchMap(({ payload = 'Your work has been saved' }: Action) =>
+      from(
+        Swal.fire({
+          type: 'success',
+          title: payload,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      ).pipe(_ => empty())
+    )
+  );
+
+export default [getReportEpic, checkUserEpic, displayNotificationEpic];

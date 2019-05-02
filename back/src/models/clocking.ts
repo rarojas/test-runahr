@@ -11,6 +11,8 @@ export interface ClockingAttributes {
   updatedAt?: Date;
 }
 
+export interface ClockingModel
+  extends Sequelize.Model<ClockingInstance, ClockingAttributes> {}
 export interface ClockingInstance
   extends Sequelize.Instance<ClockingAttributes>,
     ClockingAttributes {}

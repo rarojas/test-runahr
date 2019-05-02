@@ -59,7 +59,7 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     },
     async (token, done) => {
-      try {
+      try {        
         return done(null, token);
       } catch (error) {
         done(error);

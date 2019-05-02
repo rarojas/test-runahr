@@ -13,8 +13,9 @@ import {
   switchMap,
   mergeMap
 } from 'rxjs/operators';
-import { ajax } from 'rxjs/ajax';
 import { authenticated } from '../../store/ducks/users/operations';
+import { axios } from '../../store/client/axios';
+import { AxiosResponse } from 'axios';
 
 interface State {
   text: string;
@@ -46,9 +47,9 @@ export default class SearchUser extends React.Component<Props, State> {
         mergeMap(authenticated),
         switchMap(({ headers, value }: any) =>
           value
-            ? ajax
-                .get('http://localhost:4000/api/user/search?search=' + value, headers)
-                .pipe(map(({ response }: any) => response))
+            ? axios
+                .get('/api/user/search?search=' + value, headers)
+                .pipe(map(({ data }: AxiosResponse) => data))
             : from(Promise.resolve([]))
         )
       )

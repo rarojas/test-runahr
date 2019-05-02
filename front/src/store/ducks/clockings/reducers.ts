@@ -22,13 +22,10 @@ export function toList<T>(obj: [], record: any) {
 const clockings = createReducer(ClockingsReducer)({
   [types.getReport.success.type]: (
     state: types.ClockingReducer,
-    action: AnyAction
+    { payload: { id, clockings } }: AnyAction
   ) =>
     state
-      .setIn(
-        ['clockings', action.payload.id],
-        List(toList(action.payload, ClockingRecord))
-      )
+      .setIn(['clockings', id], List(toList(clockings, ClockingRecord)))
       .set('loading', false),
 
   [types.getReport.failure.type]: (

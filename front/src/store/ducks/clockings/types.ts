@@ -18,5 +18,6 @@ export type ClockingReducer = Immutable.RecordOf<ClockingState>;
 
 export const getReport = factory.asynchronous('GET_REPORT');
 export const checkUser = factory.asynchronous('CHECK_USER');
+export const displaySuccess = factory.synchronous('DISPLAY_SUCCESS');
 
-export default { getReport, checkUser };
+export default { getReport, checkUser, displaySuccess };

@@ -14,10 +14,17 @@ import {
 import { User } from '../../../store/ducks/users/types';
 import SearchUser from '../../../components/SearchUser';
 import { CurrentTime } from '../../../components/CurrentTime';
+import styled from 'styled-components';
+import Swal from 'sweetalert2';
+
+const UserListItem = styled(ListGroupItem)`
+  cursor: pointer !important;
+`;
 
 interface State {
   users: User[];
   selected?: User;
+  loading: boolean;
 }
 
 interface Props {
@@ -27,7 +34,8 @@ interface Props {
 export default class Clocking extends React.Component<Props, State> {
   state: State = {
     users: [],
-    selected: undefined
+    selected: undefined,
+    loading: false
   };
 
   setUsers = (users: User[]) => {
@@ -62,16 +70,18 @@ export default class Clocking extends React.Component<Props, State> {
             </FormGroup>
             <SearchUser onResult={this.setUsers} />
             <label>Results:</label>
-            {users.map(user => (
-              <ListGroup>
-                <ListGroupItem
+            <ListGroup>
+              {users.map(user => (
+                <UserListItem
+                  key={user.id}
                   onClick={this.setUser(user)}
                   active={selected && user.id === selected!.id}
                 >
                   {user.username}
-                </ListGroupItem>
-              </ListGroup>
-            ))}
+                </UserListItem>
+              ))}
+            </ListGroup>
+
             {selected && (
               <>
                 <label>Selected User</label>

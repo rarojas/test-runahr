@@ -35,7 +35,7 @@ export default class NavbarLight extends React.Component<Props> {
       <Container fluid>
         <Container fluid>
           <Navbar expandSm light>
-            <Nav start>
+            <Nav start="true">
               <Link to={isAuthenticated ? '/home' : '/'}>
                 <NavbarLink light brand>
                   Clocking
@@ -72,7 +72,7 @@ export default class NavbarLight extends React.Component<Props> {
                 )}
               </Nav>
             )}
-            <Nav end collapse expandSm hidden={hidden}>
+            <Nav end="true" collapse expandSm hidden={hidden}>
               <CurrentTime />
               {isAuthenticated && <Button onClick={logout}>Logout</Button>}
             </Nav>

@@ -18,7 +18,7 @@ const mapStateToProps = (state: State, ownProps: any) => {
 const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
-      addUser: actions.editUser
+      editUser: actions.editUser
     },
     dispatch
   );

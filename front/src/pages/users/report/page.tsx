@@ -9,23 +9,23 @@ import {
 } from '../../../components/layout/Forms/Layouts';
 import ReactTable, { Column as TableColumn } from 'react-table';
 import Clocking from '../../admin/clocking/page';
-import { List } from 'immutable';
+import moment from 'moment';
 
 interface Props {
   getReport: Function;
-  clockings: List<Clocking>;
+  clockings: Clocking[];
 }
 
 const columns: Array<TableColumn> = [
   {
     Header: 'Date',
-    accessor: 'date',
-    Cell: (props: any) => <span className="number">{props.value}</span>
+    accessor: 'time',
+    Cell: (props: any) => <span>{moment(props.value).format('L')}</span>
   },
   {
     Header: 'Time',
-    accessor: 'date',
-    Cell: (props: any) => <span className="number">{props.value}</span>
+    accessor: 'time',
+    Cell: (props: any) => <span>{moment(props.value).format('LT')}</span>
   },
   {
     Header: 'Type',
@@ -46,7 +46,7 @@ export default class ReportPage extends React.Component<Props> {
         <RowCentered>
           <Column>
             <ReactTable
-              data={clockings.toArray()}
+              data={clockings}
               columns={columns}
               pageSize={10}
               pageSizeOptions={[10]}

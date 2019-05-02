@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { rootReducer, rootEpic } from './root';
+import { rootReducer, rootEpic, State } from './root';
 import { createEpicMiddleware } from 'redux-observable';
 import { compose } from 'redux';
 import { login } from './ducks/authentication/types';
@@ -10,7 +10,7 @@ export default function configureStore() {
     //@ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  const epicMiddleware = createEpicMiddleware();
+  const epicMiddleware = createEpicMiddleware<any, any, State, any>();
 
   let store = createStore(
     rootReducer,

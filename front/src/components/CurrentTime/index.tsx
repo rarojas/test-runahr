@@ -1,9 +1,10 @@
 import React from 'react';
 import { interval, Subscription } from 'rxjs';
 import styled from 'styled-components';
+import moment from 'moment';
 
 interface State {
-  curTime: string;
+  curTime: number;
 }
 
 interface Props {}
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
 
 export class CurrentTime extends React.Component<Props, State> {
   state: State = {
-    curTime: ''
+    curTime: Date.now()
   };
 
   intervalTime = interval(1000);
@@ -21,7 +22,7 @@ export class CurrentTime extends React.Component<Props, State> {
 
   setTime = () => {
     this.setState({
-      curTime: new Date().toLocaleString()
+      curTime: Date.now()
     });
   };
 
@@ -34,9 +35,11 @@ export class CurrentTime extends React.Component<Props, State> {
   }
 
   render() {
+    const { curTime } = this.state;
+
     return (
       <Wrapper>
-        <label>{this.state.curTime}</label>
+        <label>{moment(curTime).format('MM/DD/YYYY h:mm:ss a')}</label>
       </Wrapper>
     );
   }
