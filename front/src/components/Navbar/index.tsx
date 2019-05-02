@@ -7,7 +7,6 @@ import {
   Nav
   //@ts-ignore
 } from 'styled-bootstrap-components';
-import { Link } from 'react-router-dom';
 import { CurrentTime } from '../CurrentTime';
 
 interface Props {
@@ -36,11 +35,10 @@ export default class NavbarLight extends React.Component<Props> {
         <Container fluid>
           <Navbar expandSm light>
             <Nav start="true">
-              <Link to={isAuthenticated ? '/home' : '/'}>
-                <NavbarLink light brand>
-                  Clocking
-                </NavbarLink>
-              </Link>
+              <NavbarLink light brand href={isAuthenticated ? '/home' : '/'}>
+                Clocking
+              </NavbarLink>
+
               <Button
                 light
                 outline
@@ -52,23 +50,23 @@ export default class NavbarLight extends React.Component<Props> {
               </Button>
             </Nav>
             {isAuthenticated && (
-              <Nav start collapse expandSm hidden={hidden}>
+              <Nav start="true" collapse expandSm hidden={hidden}>
                 {isAdmin ? (
                   <>
-                    <Link to="/users">
-                      <NavbarLink light>Users</NavbarLink>
-                    </Link>
-                    <Link to="/clockings">
-                      <NavbarLink light>Check In</NavbarLink>
-                    </Link>
-                    <Link to="/report">
-                      <NavbarLink light>My Report</NavbarLink>
-                    </Link>
+                    <NavbarLink light href="/users">
+                      Users
+                    </NavbarLink>
+                    <NavbarLink light href="/clockings">
+                      Check In
+                    </NavbarLink>
+                    <NavbarLink light href="/report">
+                      My Report
+                    </NavbarLink>
                   </>
                 ) : (
-                  <Link to="/report">
-                    <NavbarLink light>My Report</NavbarLink>
-                  </Link>
+                  <NavbarLink light href="/report">
+                    My Report
+                  </NavbarLink>
                 )}
               </Nav>
             )}

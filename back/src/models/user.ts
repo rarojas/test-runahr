@@ -16,14 +16,14 @@ export interface UserInstance
   extends Sequelize.Instance<UserAttributes>,
     UserAttributes {
   validPassword: (password: string) => Promise<boolean>;
-  toJson: () => any;
+  toJSON: () => any;
 }
 
 export interface UserModel
   extends Sequelize.Model<UserInstance, UserAttributes> {
   prototype?: {
     validPassword: (password: string) => Promise<boolean>;
-    toJson: () => any;
+    toJSON: () => any;
   };
   findByLogin?(login: string): Promise<UserInstance | undefined>;
 }
@@ -80,7 +80,7 @@ const UserFactory = (
     return await bcrypt.compare(password, this.dataValues.password);
   };
 
-  User.prototype.toJson = function() {
+  User.prototype.toJSON = function() {
     const userObj = Object.assign({}, this.dataValues);
     delete userObj.password;
     return userObj;
@@ -88,7 +88,6 @@ const UserFactory = (
 
   User.associate = models => User.hasMany(models.clocking);
   User.beforeCreate(hashPassword);
-
   User.beforeUpdate(hashPassword);
 
   User.findByLogin = async (

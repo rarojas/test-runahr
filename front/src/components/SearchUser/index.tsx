@@ -21,10 +21,14 @@ interface State {
   text: string;
 }
 interface Props {
-  onResult: Function;
+  onResult?: Function;
 }
 
 export default class SearchUser extends React.Component<Props, State> {
+  static defaultProps = {
+    onResult: () => {}
+  };
+
   state: State = {
     text: ''
   };
@@ -53,7 +57,7 @@ export default class SearchUser extends React.Component<Props, State> {
             : from(Promise.resolve([]))
         )
       )
-      .subscribe(users => onResult(users));
+      .subscribe(users => onResult!(users));
   };
 
   componentWillUnmount() {

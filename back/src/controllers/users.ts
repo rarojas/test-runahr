@@ -30,7 +30,7 @@ class UsersController {
   async createUser(req: express.Request, res: express.Response) {
     let user = req.body;
     user = await models.user.create(user);
-    res.status(201).json(user.toJson());
+    res.status(201).json(user);
   }
 
   async updateUser(req: express.Request, res: express.Response) {
