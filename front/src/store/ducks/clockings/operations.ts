@@ -5,14 +5,14 @@ import { getReport, checkUser, displaySuccess } from './types';
 import { Epic } from 'redux-observable';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
-import { axios } from '../../client/axios';
+import api from '../../client/api';
 import Swal from 'sweetalert2';
 
 const checkUserEpic: Epic = action$ =>
   action$.ofType(checkUser.type).pipe(
     mergeMap(authenticated),
     mergeMap(({ payload }: any) =>
-      axios.post('/api/clocking/check', payload).pipe(
+      api.post('/api/clocking/check', payload).pipe(
         mergeMap(({ data }) => [checkUser.success(data), displaySuccess()]),
         catchError(err => of(checkUser.failure(err)))
       )
@@ -23,7 +23,7 @@ const getReportEpic: Epic<any, any, State, any> = (action$, state$) =>
   action$.ofType(getReport.type).pipe(
     mergeMap(authenticated),
     mergeMap(() =>
-      axios.get('/api/clocking/me').pipe(
+      api.get('/api/clocking/me').pipe(
         map(({ data }) =>
           getReport.success({
             id: state$.value.authentication.getIn(['user', 'id']),

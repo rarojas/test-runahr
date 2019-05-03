@@ -16,7 +16,7 @@ export const TextInput = ({
   input,
   label,
   type,
-  meta: { touched, error, warning }
+  meta: { touched, error }
 }: WrappedFieldProps & { type: string; label: string }) => {
   return (
     <>
@@ -35,7 +35,7 @@ export const TextInput = ({
 export const Select = ({
   input,
   label,
-  meta: { touched, error, warning },
+  meta: { touched, error },
   children
 }: WrappedFieldProps & { type: string; label: string; children: any }) => {
   return (

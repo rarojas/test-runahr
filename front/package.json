@@ -50,7 +50,10 @@
   ],
   "devDependencies": {
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/react-test-renderer": "^16.8.1",
+    "axios-mock-adapter": "^1.16.0",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1"
+    "enzyme-adapter-react-16": "^1.12.1",
+    "react-test-renderer": "^16.8.6"
   }
 }

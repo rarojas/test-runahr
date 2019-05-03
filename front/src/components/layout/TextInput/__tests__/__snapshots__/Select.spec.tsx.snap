@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render DateInput render correctly date component 1`] = `
+Array [
+  <small
+    className="sc-jWBwVP jvELBg"
+  >
+    label
+  </small>,
+  <select
+    className="sc-kkGfuU ciotAl"
+    placeholder="label"
+    value="1"
+  >
+    <option
+      value="1"
+    >
+      1
+    </option>
+  </select>,
+]
+`;

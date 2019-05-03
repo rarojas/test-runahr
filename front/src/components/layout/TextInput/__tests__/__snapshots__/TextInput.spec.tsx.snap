@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render DateInput render correctly date component 1`] = `
+Array [
+  <small
+    className="sc-jWBwVP jvELBg"
+  >
+    label
+  </small>,
+  <input
+    className="sc-hMqMXs qIUiT"
+    placeholder="label"
+    type="text"
+    value="value"
+  />,
+]
+`;
+
+exports[`Render TextInput render correctly component 1`] = `
+Array [
+  <small
+    className="sc-jWBwVP jvELBg"
+  >
+    label
+  </small>,
+  <input
+    className="sc-hMqMXs qIUiT"
+    placeholder="label"
+    type="text"
+    value="value"
+  />,
+]
+`;

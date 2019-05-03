@@ -3,13 +3,13 @@ import { login, logout } from './types';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { saveToken, deleteToken } from '../../utils/Auth';
-import { axios, handleError } from '../../client/axios';
+import api, {  handleError } from '../../client/api';
 
-const loginEpic: Epic = action$ =>
+export const loginEpic: Epic = action$ =>
   action$.ofType(login.type).pipe(
     mergeMap(action => {
-      const { resolve = undefined, reject = undefined } = action.meta || {};
-      return axios.post('http://localhost:4000/login', action.payload).pipe(
+      const { resolve = undefined, reject = undefined } = action.meta || {};      
+      return api.post('/login', action.payload).pipe(
         map(({ data }: any) => {
           const payload = saveToken(data.token, data.user);
           if (resolve) resolve(payload);
@@ -26,7 +26,7 @@ const loginEpic: Epic = action$ =>
 const logoutEpic: Epic = action$ =>
   action$.ofType(logout.type).pipe(
     mergeMap((action: any) => {
-      axios.defaults.headers['Authorization'] = undefined;
+      api.defaults.headers['Authorization'] = undefined;
       deleteToken();
       return of(logout.success());
     })

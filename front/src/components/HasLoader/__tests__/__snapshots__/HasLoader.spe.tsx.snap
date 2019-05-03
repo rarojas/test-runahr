@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render DateInput render correctly date component 1`] = `
+<div
+  className="sc-bwzfXH ghuPdm"
+>
+  <button
+    className="sc-gzVnrw eUsuSq"
+  />
+</div>
+`;

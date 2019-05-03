@@ -7,6 +7,7 @@ import {
 } from 'styled-bootstrap-components';
 import { TextInput, Select } from '../../components/layout/TextInput';
 import { PropsForm } from './types';
+import { required, email } from '../FieldLevelValidationForm';
 
 export const UserForm = ({
   handleSubmit,
@@ -20,10 +21,17 @@ export const UserForm = ({
         component={TextInput}
         type="text"
         label="Username"
+        validate={[required]}
       />
     </FormGroup>
     <FormGroup>
-      <Field name="email" component={TextInput} type="text" label="Email" />
+      <Field
+        name="email"
+        component={TextInput}
+        type="text"
+        label="Email"
+        validate={[required, email]}
+      />
     </FormGroup>
     <FormGroup>
       <Field
@@ -31,10 +39,17 @@ export const UserForm = ({
         component={TextInput}
         type="password"
         label="Password"
+        validate={[required]}
       />
     </FormGroup>
     <FormGroup>
-      <Field name="role" component={Select} type="text" label="Role">
+      <Field
+        name="role"
+        component={Select}
+        type="text"
+        label="Role"
+        validate={[required]}
+      >
         <option value="employe">Employe</option>
         <option value="admin">Admin</option>
       </Field>

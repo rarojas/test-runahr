@@ -14,7 +14,7 @@ import {
   mergeMap
 } from 'rxjs/operators';
 import { authenticated } from '../../store/ducks/users/operations';
-import { axios } from '../../store/client/axios';
+import api  from '../../store/client/api';
 import { AxiosResponse } from 'axios';
 
 interface State {
@@ -27,10 +27,6 @@ interface Props {
 export default class SearchUser extends React.Component<Props, State> {
   static defaultProps = {
     onResult: () => {}
-  };
-
-  state: State = {
-    text: ''
   };
 
   inputStream = new Subject();
@@ -51,7 +47,7 @@ export default class SearchUser extends React.Component<Props, State> {
         mergeMap(authenticated),
         switchMap(({ headers, value }: any) =>
           value
-            ? axios
+            ? api
                 .get('/api/user/search?search=' + value, headers)
                 .pipe(map(({ data }: AxiosResponse) => data))
             : from(Promise.resolve([]))

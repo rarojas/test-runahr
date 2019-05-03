@@ -19,10 +19,12 @@ const Overlay = styled.div`
 `;
 
 export interface HasLoaderProps {
-  loading: boolean;
+  loading?: boolean;
 }
 
-const HasLoader = (Component: any) => (props: any) => (
+const HasLoader = <P extends object>(Component: React.ComponentType<P>) => (
+  props: HasLoaderProps & P
+) => (
   <Wrapper>
     <Component {...props} />
     {props.loading && (
